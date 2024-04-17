@@ -7,8 +7,9 @@ class CustomBM25():
     
     
     def rerank(self, query, corpus, top_k=3):
-        
+        query = f"{query} {query}"
         corpus_text = [
+            
             get_passage_emb_template(
                 title       = item["metadata"]["title"],
                 authors     = " ".join(item["metadata"]["authors"]),

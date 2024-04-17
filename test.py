@@ -33,13 +33,13 @@ pipeline = SentenceTransformerPineconePipeline()
 #     )
 # )
 # Query data
-# import json
-# from core.modules.bm25 import CustomBM25
-# pipeline = SentenceTransformerPineconePipeline("intfloat/e5-small")
-# while True:
-#     q = get_query_emb_template(input("[>] "))
-#     r = pipeline.encoding_and_query(query=q, top_k=10)
-#     print(r)
+import json
+from core.modules.bm25 import CustomBM25
+pipeline = SentenceTransformerPineconePipeline("intfloat/e5-small")
+while True:
+    q = input("[>] ")
+    r = pipeline.encoding_and_query(query=q, top_k=10)
+    print(r)
 
     
 

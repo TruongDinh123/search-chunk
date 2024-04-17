@@ -55,10 +55,12 @@ class SentenceTransformerPineconePipeline:
             return -1
         
     def encoding_and_query(self, query, top_k=10, rerank=True):
-        v = self.e.encode_chunk(get_query_emb_template(query))
+        MAGIC = get_query_emb_template(get_query_emb_template(query))
+        v = self.e.encode_chunk(MAGIC)
         response = self.p.search(vector=v, top_k=top_k).to_dict()
         if rerank == False:
             return response
+        
         
         bm25 = CustomBM25()
         reranked = bm25.rerank(

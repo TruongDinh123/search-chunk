@@ -5,7 +5,7 @@ from core.modules.pinecone import CustomPinecone
 import json
 
 app = Flask(__name__)
-SENTENCETRANSFORMER_PINECONE_PIPELINE = SentenceTransformerPineconePipeline()
+SENTENCETRANSFORMER_PINECONE_PIPELINE = SentenceTransformerPineconePipeline("intfloat/e5-small")
 
 
 
@@ -43,7 +43,6 @@ def search():
         r = SENTENCETRANSFORMER_PINECONE_PIPELINE.encoding_and_query(
             query=str(data["query"]), 
             top_k=int(data["top_k"]),
-            rerank=True
         )        
                 
         return jsonify({"matches": r["matches"]}), 200
