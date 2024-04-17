@@ -18,4 +18,4 @@ def get_query_emb_template(
     query: str,
 ):
     """Dùng khi embedding"""
-    return f"query: {query}"
+    return f"passage: {query}"
