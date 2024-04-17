@@ -8,8 +8,6 @@ import uuid
 # "sentence-transformers//models/stsb-xlm-r-multilingual"
 
 
-
-
 class SentenceEmbedder():
     
     def __init__(self, model_name):

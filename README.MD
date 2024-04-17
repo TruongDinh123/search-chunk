@@ -3,53 +3,55 @@
 ## Query
 
 ```bash
-curl -X POST -H "Content-Type: application/x-www-form-urlencoded"  -d "query=Kho báu đời mình ở đâu" -d "top_k=2" http://127.0.0.1:3322/api/95buddha/query
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded"  -d "query=tự do là gì?" -d "top_k=2" http://127.0.0.1:3322/api/95buddha/chunk/query
 ```
 
 ```json
 {
   "matches": [
     {
-      "id": "03b93cfbc3c846279a069ce73afb52c3",
+      "id": "2203e3f8799c41479fdd9667d8b8df56",
       "metadata": {
         "authors": [
-          "Paullo Coelho"
+          "Nguyên Phong"
         ],
-        "text": "H\u00e3y nh\u1edb r\u1eb1ng, tr\u00e1i tim c\u1ee7a b\u1ea1n \u1edf \u0111\u00e2u, th\u00ec t\u1ea1i n\u01a1i \u0111\u00f3 b\u1ea1n s\u1ebd t\u00ecm th\u1ea5y kho b\u00e1u c\u1ee7a \u0111\u1eddi m\u00ecnh"
+        "document_id": "this-is-test-document-id",
+        "pipeline_profile": "intfloat/e5-small",
+        "text": "Tự do tư tưởng không phải chỉ là muốn nghĩ thế nào thì nghĩ, mà còn là giải thoát ta ra khỏi các áp lực bắt ta phải suy nghĩ theo một lề lối nào đó.",
+        "title": "Hành trình về Phương Đông",
+        "types": [
+          "Tâm linh"
+        ]
       },
-      "score": 0.742982626,
-      "values": [
-        -0.0879698694,
-        0.075806424,
-        0.00975498091,
-        -0.052055832,
-        ...
-      ]
+      "score": 0.832516849,
+      "values": []
     },
     {
-      "id": "d6bef45e0edd4c89bfe8a2e7733b91c3",
+      "id": "e3e560deda074acdb22caa90e6b499e4",
       "metadata": {
         "authors": [
-          "Paullo Coelho"
+          "Paulo Coelho"
         ],
-        "text": "M\u1ecdi ph\u01b0\u1edbc l\u00e0nh b\u1ecb t\u1eeb ch\u1ed1i \u0111\u1ec1u tr\u1edf th\u00e0nh m\u1ed9t l\u1eddi nguy\u1ec1n"
+        "document_id": "this-is-test-document-id",
+        "pipeline_profile": "intfloat/e5-small",
+        "text": "Nếu bạn chinh phục được chính mình, bạn có thể chinh phục được cả thế giới.",
+        "title": "Nhà Giả Kim",
+        "types": [
+          "Tiểu thuyết"
+        ]
       },
-      "score": 0.738684416,
-      "values": [
-        -0.0759756342,
-        0.0447352901,
-        0.0067217024,
-        -0.054945454,
-        ...
-      ]
+      "score": 0.832013488,
+      "values": []
     }
   ]
 }
 ```
 
 ## Upsert (Emb và đẩy dữ liệu lên Pinecone)
+authors, types: str (các tên cách nhau bởi dấu , )
+
 ```bash
-curl -X POST -H "Content-Type: application/x-www-form-urlencoded" http://127.0.0.1:3322/api/95buddha/upsert -d "text=Buổi trưa ăn bưởi chua" -d "authors=sang, san" 
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" http://127.0.0.1:3322/api/95buddha/chunk/upsert -d "text=Buổi trưa ăn bưởi chua" -d "authors=sang, san" -d "title=Tác phẩm nhảm nhí" -d "type=Chuyện cười, văn học" 
 ```
 
 ```
@@ -64,3 +66,14 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" http://127.0.0
 }
 ```
 
+
+## Delete 1 chunk
+```bash
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" http://127.0.0.1:3322/api/95buddha/chunk/delete -d "id=5af07e639fe944bd8de4487bac301d87"
+```
+
+```
+{
+  "message": "Deleted successfully 5af07e639fe944bd8de4487bac301d87"
+}
+```
