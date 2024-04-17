@@ -11,7 +11,6 @@ class SentenceTransformerPineconePipeline:
         self.e = SentenceEmbedder(sentence_transformer_model)
         self.p = CustomPinecone()
         self.sentence_transformer_model = sentence_transformer_model
-        self.bm25 = CustomBM25()
     
     def get_pipeline_profile(self):
         return f"{self.sentence_transformer_model}"
@@ -57,16 +56,19 @@ class SentenceTransformerPineconePipeline:
         
     def encoding_and_query(self, query, top_k=10, rerank=True):
         v = self.e.encode_chunk(get_query_emb_template(query))
-        response = self.p.search(vector=v, top_k=top_k)
+        response = self.p.search(vector=v, top_k=top_k).to_dict()
         if rerank == False:
             return response
-        else:
-            bm25 = CustomBM25()
-            reranked = bm25.rerank(
-                query=query,
-                corpus=response["matches"]
-            )        
-            return reranked
+        
+        bm25 = CustomBM25()
+        reranked = bm25.rerank(
+            query=query,
+            corpus=response["matches"]
+        )
+        
+        return {
+            "matches": reranked
+        }
     
         
         

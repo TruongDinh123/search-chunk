@@ -3,7 +3,7 @@
 ## Query
 
 ```bash
-curl -X POST -H "Content-Type: application/x-www-form-urlencoded"  -d "query=tự do là gì?" -d "top_k=2" http://127.0.0.1:3322/api/95buddha/chunk/query
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded"  -d "query=tự do là gì?" -d "top_k=10" http://127.0.0.1:3322/api/95buddha/chunk/query
 ```
 
 ```json

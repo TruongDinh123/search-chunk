@@ -42,9 +42,10 @@ def search():
         data = request.form
         r = SENTENCETRANSFORMER_PINECONE_PIPELINE.encoding_and_query(
             query=str(data["query"]), 
-            top_k=int(data["top_k"])
-        ).to_dict()        
-        
+            top_k=int(data["top_k"]),
+            rerank=True
+        )        
+                
         return jsonify({"matches": r["matches"]}), 200
     
     except Exception as e:
