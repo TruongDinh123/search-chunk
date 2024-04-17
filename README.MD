@@ -51,7 +51,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded"  -d "query=t�
 authors, types: str (các tên cách nhau bởi dấu , )
 
 ```bash
-curl -X POST -H "Content-Type: application/x-www-form-urlencoded" http://127.0.0.1:3322/api/95buddha/chunk/upsert -d "text=Buổi trưa ăn bưởi chua" -d "authors=sang, san" -d "title=Tác phẩm nhảm nhí" -d "type=Chuyện cười, văn học" 
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" http://127.0.0.1:3322/api/95buddha/chunk/upsert -d "text=Buổi trưa ăn bưởi chua" -d "authors=sang, san" -d "title=Tác phẩm nhảm nhí" -d "type=Chuyện cười, văn học" -d "document_id=this-is-test-document-id"
 ```
 
 ```
